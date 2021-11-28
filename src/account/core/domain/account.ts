@@ -8,6 +8,12 @@ export class Account {
   private _transactions: Transaction[] = [];
 
   constructor(private _accountId: string, private _clientId: string, transactions: Transaction[]) {
+    if (!this._accountId) {
+      throw new Error('Account Id cannot be null');
+    }
+    if (!this._clientId) {
+      throw new Error('Client Id cannot be null');
+    }
     this._balance = 0;
     for (const transaction of transactions) {
       if (transaction.transactionType == TransactionType.CREDIT) {
